@@ -2,7 +2,15 @@ import express from 'express';
 
 import sequelize from "./config/db.js"
 
+import routesAnotacao from './routes/anotacaoRoute.js';
+
 const app = express();
+
+app.use(express.json());
+
+app.use("/", routesAnotacao);
+
+
 
 sequelize.authenticate()
     .then(() => {
