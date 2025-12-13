@@ -2,7 +2,7 @@ import { stringify } from "querystring";
 import sequelize from "../config/db.js";
 import { DataTypes } from "sequelize"
 
-import Usuario from "./usuarioModel.js";
+import Usuario from "./userModel.js";
 
 const Anotacao = sequelize.define(
     "Anotacao",
