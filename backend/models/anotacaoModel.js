@@ -2,6 +2,8 @@ import { stringify } from "querystring";
 import sequelize from "../config/db.js";
 import { DataTypes } from "sequelize"
 
+import Usuario from "./usuarioModel.js";
+
 const Anotacao = sequelize.define(
     "Anotacao",
     {
@@ -38,5 +40,10 @@ const Anotacao = sequelize.define(
         timestamps: false
     }
 );
+
+
+//Associação
+Usuario.hasMany(Anotacao, { foreignKey: "id_usuario" });
+Anotacao.belongsTo(Usuario, { foreignKey: "id_usuario" });
 
 export default Anotacao;
