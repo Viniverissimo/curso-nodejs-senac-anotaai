@@ -38,9 +38,51 @@ async function criar(req,res) {
         res.status(500).json({ mensagem: "Erro inesperado", error });
     } 
 };
-async function atualizar(req,res) {
-};
+async function atualizar(req, res) {
+    const { id } = req.params;
+    const { descricao, data_criacao, id_usuario } = req.body;
+
+    try {
+        const anotacaoBuscada = await Anotacao.findByPk(id);
+
+        if (!anotacaoBuscada) {
+            return res.status(404).json({ mensagem: "Anotação não encontrada" });
+        }
+
+        await anotacaoBuscada.update({
+            descricao,
+            data_criacao,
+            id_usuario
+        });
+
+        return res.status(200).json(anotacaoBuscada);
+        
+    } catch (error) {
+        return res.status(500).json({
+            mensagem: "Erro inesperado",
+            error: error.message
+        });
+    }
+}
+
 async function deletar(req,res) {
+    const { id } = req.params;
+
+    try {
+        const anotacaoBuscada = await obterPorIdInterno(id);
+
+        if (!anotacaoBuscada) {
+            return res.status(404).json({ mensagem: "Anotação não encontrada" });
+        }
+
+        await Anotacao.destroy({
+            where: { id_anotacao: id }
+        });
+
+        res.status(200).json({ mensagem: "Anotação deletada com sucesso" });
+    } catch (error) {
+        res.status(500).json({ mensagem: "Erro inesperado", error });
+    }
 };
 async function obterPorIdInterno(id) {
     try {

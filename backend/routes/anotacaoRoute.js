@@ -7,7 +7,7 @@ routes
     .get("/anotacao", anotacaoController.listar)
     .get("/anotacao/:id", anotacaoController.obterPorID)
     .post("/anotacao", anotacaoController.criar)
-    .put("/anotacao/:id", anotacaoController.atualizar)
+    .patch("/anotacao/:id", anotacaoController.atualizar)
     .delete("/anotacao/:id", anotacaoController.deletar);
 
 export default routes;
